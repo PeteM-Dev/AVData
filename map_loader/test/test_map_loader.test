@@ -1,0 +1,12 @@
+<launch>
+  <test test-name="map_loader_tests" pkg="map_loader" type="map_loader_tests" time-limit="60.0">
+    <param name="test_data_dir" value="$(find map_loader)/test/data" />
+  </test>
+  
+  <param name="pcd_topic" value="/test_pointcloud_map" />
+  <param name="pose_topic" value="/test_pose" />
+  <param name="neighbor_dist" value="64.0" />
+  <param name="publish_rate" value="10.0" />
+  
+  <node name="rosout" pkg="rosout" type="rosout" />
+</launch>

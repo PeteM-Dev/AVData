@@ -8,6 +8,7 @@ find_package(catkin REQUIRED COMPONENTS
   pcl_conversions
 )
 find_package(PCL 1.7 REQUIRED COMPONENTS io)
+find_package(rostest REQUIRED)
 
 pkg_check_modules(EIGEN3 REQUIRED eigen3)
 
@@ -38,3 +39,8 @@ add_executable(point_cloud_map_loader src/point_cloud_map_loader.cpp)
 
 target_link_libraries(reflectivity_map_loader ${catkin_LIBRARIES} ${PCL_IO_LIBRARIES})
 target_link_libraries(point_cloud_map_loader ${catkin_LIBRARIES} ${PCL_IO_LIBRARIES})
+
+if(CATKIN_ENABLE_TESTING)
+  add_rostest_gtest(map_loader_tests test/test_map_loader.test test/test_map_loader.cpp)
+  target_link_libraries(map_loader_tests ${catkin_LIBRARIES} ${PCL_IO_LIBRARIES})
+endif()
