@@ -1,0 +1,19 @@
+<launch>
+  <test test-name="multi_lidar_integration_tests" pkg="ford_demo" type="test_multi_lidar_integration.py" time-limit="120.0">
+    <param name="test_data_dir" value="$(find ford_demo)/test/data" />
+  </test>
+  
+  <node pkg="nodelet" type="nodelet" name="test_velodyne_nodelet_manager" args="manager" />
+  
+  <node pkg="nodelet" type="nodelet" name="test_velodyne_red_convert"
+        args="load velodyne_pointcloud/TransformNodelet test_velodyne_nodelet_manager">
+    <param name="calibration" value="$(find ford_demo)/params/lidarIntrinsics.yaml"/>
+    <param name="max_range" value="130.0"/>
+    <param name="min_range" value="3.0"/>
+    <param name="fixed_frame" value="lidar_red"/>
+    <param name="target_frame" value="lidar_red"/>
+    <param name="model" value="32E"/>
+    <remap from="velodyne_packets" to="test_lidar_red_scan"/>
+    <remap from="velodyne_points" to="test_lidar_red_pointcloud"/>
+  </node>
+</launch>

@@ -1,0 +1,7 @@
+<launch>
+  <test test-name="extrinsics_broadcast_tests" pkg="ford_demo" type="test_extrinsics_broadcast.py" time-limit="60.0">
+    <param name="test_data_dir" value="$(find ford_demo)/test/data" />
+  </test>
+  
+  <node name="rosout" pkg="rosout" type="rosout" />
+</launch>
